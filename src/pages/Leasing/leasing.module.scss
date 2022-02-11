@@ -1,0 +1,35 @@
+@import "styles/mixins.scss";
+@import "styles/colors.scss";
+
+.leasing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  & form {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    & input {
+      padding: 11px 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.096);
+      font-family: "Lato", sans-serif;
+      font-weight: 200;
+      font-size: 16px;
+      &::placeholder {
+        color: rgb(190, 190, 190);
+      }
+    }
+    & button[type="submit"] {
+      @include button($yellow, white);
+      margin: 12px 0;
+    }
+  }
+  & button {
+    @include button(rgb(102, 156, 102), white);
+  }
+}
