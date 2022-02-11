@@ -1,0 +1,5 @@
+.button {
+  & div[data-testid="tail-spin-loading"] {
+    justify-content: center !important;
+  }
+}

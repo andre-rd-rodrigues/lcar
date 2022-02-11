@@ -3,28 +3,47 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import AnimatedNumbers from "react-animated-numbers";
 import styles from "./leasing.module.scss";
-import { Link } from "react-router-dom";
+import ErrorMessage from "../../components/ErrorMessage";
+import InputField from "../../components/InputField";
+import Button from "../../components/Button";
 
 function Leasing() {
   const [result, setResult] = useState(undefined);
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  const digitsOnly = (value) =>
+    /^\d*[\.{1}\d*]\d*$/.test(value) || value.length === 0;
 
   const LeasingSchema = Yup.object().shape({
     monthDuration: Yup.number()
       .min(6, "6 months minimum")
       .max(48, "48 months maximum")
-      .required("Required"),
-    amountFinanced: Yup.number()
-      .min(10000, "The minimum finance is 10.000€")
-      .max(100000, "The maximum finance is 100.000€")
       .required("Required")
+      .test(
+        "noDecimals",
+        "Decimals are not allowed.",
+        (number) => number % 1 === 0
+      ),
+
+    amountFinanced: Yup.number()
+      .min(10000, "The minimum finance is 10K€")
+      .max(100000, "The maximum finance is 100K€")
+      .required("Required")
+      .test(
+        "noDecimals",
+        "Decimals are not allowed.",
+        (number) => number % 1 === 0
+      )
   });
 
   //HTTP request
   const handleCalculation = ({ monthDuration, amountFinanced }) => {
-    //Round number
-    const roundedValue = parseFloat(amountFinanced / monthDuration).toFixed(2);
-    return setResult(roundedValue);
+    setLoading(true);
+
+    setResult(parseFloat(amountFinanced / monthDuration).toFixed(2));
+
+    setLoading(false);
   };
   const handleSubmit = (values) => {
     const finalInfo = { ...values, monthlyFee: parseFloat(result) };
@@ -35,7 +54,8 @@ function Leasing() {
   const SubmitButton = (errors, values) => {
     return Object.keys(errors).length === 0 &&
       values.monthDuration > 0 &&
-      values.amountFinanced > 0 ? (
+      values.amountFinanced > 0 &&
+      !loading ? (
       <button onClick={() => handleSubmit(values)}>Submit</button>
     ) : null;
   };
@@ -51,35 +71,44 @@ function Leasing() {
         validationSchema={LeasingSchema}
         onSubmit={(values) => handleCalculation(values)}
       >
-        {({ errors, touched, values }) => (
+        {({ errors, touched, values, setFieldValue }) => (
           <Form>
-            <label htmlFor="form-monthly-duration">Monthly duration:</label>
-            <Field
+            <InputField
               type="number"
               name="monthDuration"
               placeholder="Months"
               id="form-monthly-duration"
+              label="Monthly duration:"
+              handleChange={(e) =>
+                setFieldValue("monthDuration", e.target.value)
+              }
             />
-            {errors.monthDuration && touched.monthDuration ? (
-              <div>{errors.monthDuration}</div>
-            ) : null}
-            <label htmlFor="form-amount-financed">Amount financed:</label>
-            <Field
+            <ErrorMessage
+              message={errors.monthDuration}
+              touched={touched.monthDuration}
+            />
+
+            <InputField
               type="number"
               name="amountFinanced"
               placeholder="Amount (€)"
               id="form-amount-financed"
+              label="Amount financed:"
+              handleChange={(e) =>
+                setFieldValue("amountFinanced", e.target.value)
+              }
             />
-            {errors.amountFinanced && touched.amountFinanced ? (
-              <div>{errors.amountFinanced}</div>
-            ) : null}
+            <ErrorMessage
+              message={errors.amountFinanced}
+              touched={touched.amountFinanced}
+            />
             {result && (
               <>
                 <label htmlFor="result">Monthly fee:</label>
                 <p>{result} €</p>
               </>
             )}
-            <button type="submit">Calculate</button>
+            <Button type="submit" name="Calculate" loading={loading} />
             {SubmitButton(errors, values)}
           </Form>
         )}
