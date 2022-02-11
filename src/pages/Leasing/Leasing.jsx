@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -8,13 +8,13 @@ import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import SuccessMessage from "../../components/SuccessMessage";
 import Result from "../../components/Result";
-import styles from "./leasing.module.scss";
+import SubmitButton from "components/SubmitButton";
 import { motion } from "framer-motion";
 import {
   containerVariants,
   fluidEnteringVariants
 } from "../../motion/motionVariants";
-import SubmitButton from "components/SubmitButton";
+import styles from "./leasing.module.scss";
 
 function Leasing() {
   const [result, setResult] = useState(undefined);

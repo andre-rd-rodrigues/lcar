@@ -4,7 +4,6 @@ import styles from "./errormessage.module.scss";
 import { dropDownVariants, exitErrorMessages } from "motion/motionVariants";
 
 function ErrorMessage({ message, touched }) {
-  console.log(message);
   return (
     <AnimatePresence>
       {message && touched ? (
