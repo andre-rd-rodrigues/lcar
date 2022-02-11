@@ -52,11 +52,3 @@ export const dropDownVariants = {
     }
   }
 };
-
-export const exitErrorMessages = {
-  opacity: 0,
-  y: "10px",
-  transition: {
-    duration: 0.3
-  }
-};
