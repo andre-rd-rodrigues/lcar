@@ -1,20 +1,26 @@
-import React, { useCallback, useRef, useState } from "react";
-import { Formik, Form, Field } from "formik";
+import React, { useState } from "react";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import AnimatedNumbers from "react-animated-numbers";
-import styles from "./leasing.module.scss";
 import ErrorMessage from "../../components/ErrorMessage";
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
-import Lottie from "react-lottie";
-import successLottie from "../../assets/lotties/success.json";
 import SuccessMessage from "../../components/SuccessMessage";
+import Result from "../../components/Result";
+import styles from "./leasing.module.scss";
+import { motion } from "framer-motion";
+import {
+  containerVariants,
+  fluidEnteringVariants,
+  nextVariants
+} from "../../motion/motionVariants";
 
 function Leasing() {
   const [result, setResult] = useState(undefined);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  //Form schema
   const LeasingSchema = Yup.object().shape({
     monthDuration: Yup.number()
       .min(6, "6 months minimum")
@@ -66,12 +72,19 @@ function Leasing() {
   };
 
   return (
-    <div className={styles.leasing}>
+    <motion.div
+      className={styles.leasing}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       {success ? (
         <SuccessMessage />
       ) : (
         <>
-          <h1>Leasing simulator</h1>
+          <motion.h1 variants={fluidEnteringVariants}>
+            Leasing simulator
+          </motion.h1>
           <Formik
             initialValues={{
               monthDuration: "",
@@ -110,12 +123,7 @@ function Leasing() {
                   message={errors.amountFinanced}
                   touched={touched.amountFinanced}
                 />
-                {result && (
-                  <>
-                    <label htmlFor="result">Monthly fee:</label>
-                    <p className={styles.result}>{result} €</p>
-                  </>
-                )}
+                <Result result={result} />
                 <Button type="submit" name="Calculate" loading={loading} />
                 <SubmitButton values={values} errors={errors} />
               </Form>
@@ -123,7 +131,7 @@ function Leasing() {
           </Formik>
         </>
       )}
-    </div>
+    </motion.div>
   );
 }
 
