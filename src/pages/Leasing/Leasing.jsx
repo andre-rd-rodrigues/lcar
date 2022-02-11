@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { baseURL } from "api/baseURL";
 import ErrorMessage from "../../components/ErrorMessage";
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import SuccessMessage from "../../components/SuccessMessage";
 import Result from "../../components/Result";
 import styles from "./leasing.module.scss";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   containerVariants,
-  fluidEnteringVariants,
-  dropDownVariants
+  fluidEnteringVariants
 } from "../../motion/motionVariants";
 import SubmitButton from "components/SubmitButton";
 
@@ -44,7 +44,7 @@ function Leasing() {
     setLoading(true);
 
     await axios
-      .post("http://localhost:80/calculate", {
+      .post(`${baseURL}/calculate`, {
         monthDuration,
         amountFinanced
       })
@@ -62,7 +62,7 @@ function Leasing() {
     const finalInfo = { ...values, monthlyFee: parseFloat(result) };
 
     await axios
-      .post("http://localhost:80/submit", finalInfo)
+      .post(`${baseURL}/submit`, finalInfo)
       .then((res) => {
         setTimeout(() => window.location.reload(), 3000);
         return setSuccess(true);
@@ -117,6 +117,7 @@ function Leasing() {
                   type="number"
                   min={600}
                   max={100000}
+                  step={0.01}
                   name="amountFinanced"
                   placeholder="Amount (€)"
                   id="form-amount-financed"

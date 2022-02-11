@@ -4,28 +4,12 @@ import React from "react";
 import { fluidEnteringVariants } from "../motion/motionVariants";
 import styles from "./inputfield.module.scss";
 
-function InputField({
-  id,
-  type,
-  name,
-  placeholder,
-  label,
-  handleChange,
-  max,
-  min
-}) {
+function InputField(props) {
+  const { id, label } = props;
   return (
     <motion.div className={styles.input} variants={fluidEnteringVariants}>
       <label htmlFor={id}>{label}</label>
-      <Field
-        max={max}
-        min={min}
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        id={id}
-        onChange={(e) => handleChange(e)}
-      />
+      <Field {...props} />
     </motion.div>
   );
 }
