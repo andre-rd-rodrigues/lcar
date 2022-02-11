@@ -12,6 +12,7 @@
     font-size: 33px;
   }
   & form {
+    position: relative;
     display: flex;
     flex-direction: column;
     min-width: 300px;
@@ -20,7 +21,10 @@
       margin: 12px 0;
     }
   }
-  & button {
+  & button[id="submit-btn"] {
     @include button(rgb(102, 156, 102), white);
+    position: absolute;
+    width: 100%;
+    bottom: -45px;
   }
 }

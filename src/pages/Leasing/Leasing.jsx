@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import AnimatedNumbers from "react-animated-numbers";
+import axios from "axios";
 import ErrorMessage from "../../components/ErrorMessage";
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import SuccessMessage from "../../components/SuccessMessage";
 import Result from "../../components/Result";
 import styles from "./leasing.module.scss";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   containerVariants,
   fluidEnteringVariants,
-  nextVariants
+  dropDownVariants
 } from "../../motion/motionVariants";
-import axios from "axios";
+import SubmitButton from "components/SubmitButton";
 
 function Leasing() {
   const [result, setResult] = useState(undefined);
@@ -55,7 +55,7 @@ function Leasing() {
       })
       .catch((err) => {
         alert(err);
-        setLoading(false);
+        return setLoading(false);
       });
   };
   const handleSubmit = async (values) => {
@@ -71,20 +71,6 @@ function Leasing() {
         alert(err);
         return setLoading(false);
       });
-  };
-
-  //Render
-  const SubmitButton = (props) => {
-    const { values, errors } = props;
-
-    return (
-      !loading &&
-      values.monthDuration > 0 &&
-      values.amountFinanced > 0 &&
-      Object.keys(errors).length === 0 && (
-        <button onClick={() => handleSubmit(values)}>Submit</button>
-      )
-    );
   };
 
   return (
@@ -115,6 +101,8 @@ function Leasing() {
                   type="number"
                   name="monthDuration"
                   placeholder="Months"
+                  min={6}
+                  max={48}
                   id="form-monthly-duration"
                   label="Monthly duration:"
                   handleChange={(e) =>
@@ -127,6 +115,8 @@ function Leasing() {
                 />
                 <InputField
                   type="number"
+                  min={600}
+                  max={100000}
                   name="amountFinanced"
                   placeholder="Amount (€)"
                   id="form-amount-financed"
@@ -141,7 +131,12 @@ function Leasing() {
                 />
                 <Result result={result} />
                 <Button type="submit" name="Calculate" loading={loading} />
-                <SubmitButton values={values} errors={errors} />
+                <SubmitButton
+                  values={values}
+                  errors={errors}
+                  loading={loading}
+                  onSubmit={handleSubmit}
+                />
               </Form>
             )}
           </Formik>

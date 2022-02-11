@@ -36,3 +36,27 @@ export const fluidEnteringVariants = {
     }
   }
 };
+
+export const dropDownVariants = {
+  hidden: {
+    opacity: 0,
+    y: "10px"
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      mass: 1,
+      duration: 1
+    }
+  }
+};
+
+export const exitErrorMessages = {
+  opacity: 0,
+  y: "10px",
+  transition: {
+    duration: 0.3
+  }
+};

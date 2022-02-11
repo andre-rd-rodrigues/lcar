@@ -1,12 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import styles from "./errormessage.module.scss";
+import { dropDownVariants, exitErrorMessages } from "motion/motionVariants";
 
 function ErrorMessage({ message, touched }) {
-  return message && touched ? (
-    <div className={styles.error}>
-      <p>{message}</p>
-    </div>
-  ) : null;
+  console.log(message);
+  return (
+    <AnimatePresence>
+      {message && touched ? (
+        <motion.div
+          variants={dropDownVariants}
+          exit={exitErrorMessages}
+          className={styles.error}
+        >
+          <p>{message}</p>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
+  );
 }
 
 export default ErrorMessage;

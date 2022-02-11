@@ -1,3 +1,8 @@
+import { motion } from "framer-motion";
+import {
+  containerVariants,
+  fluidEnteringVariants
+} from "motion/motionVariants";
 import React from "react";
 import Lottie from "react-lottie";
 import successLottie from "../assets/lotties/success.json";
@@ -13,11 +18,13 @@ function SuccessMessage() {
     }
   };
   return (
-    <div className={styles.success}>
+    <motion.div variants={containerVariants} className={styles.success}>
       <Lottie options={defaultOptions} height={300} width={300} />
-      <h1>Success!</h1>
-      <p>Your leasing has been submitted successfully</p>
-    </div>
+      <motion.h2 variants={fluidEnteringVariants}>Success!</motion.h2>
+      <motion.p variants={fluidEnteringVariants}>
+        Your leasing has been submitted successfully
+      </motion.p>
+    </motion.div>
   );
 }
 
