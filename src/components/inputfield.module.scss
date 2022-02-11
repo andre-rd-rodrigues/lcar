@@ -3,7 +3,7 @@
   flex-direction: column;
   & input {
     padding: 11px 10px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     border: none;
     border-radius: 5px;
     box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.096);
@@ -13,5 +13,8 @@
     &::placeholder {
       color: rgb(190, 190, 190);
     }
+  }
+  & label {
+    margin-bottom: 10px;
   }
 }
