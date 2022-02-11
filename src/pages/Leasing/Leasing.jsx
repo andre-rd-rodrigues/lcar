@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import AnimatedNumbers from "react-animated-numbers";
@@ -14,6 +14,7 @@ import {
   fluidEnteringVariants,
   nextVariants
 } from "../../motion/motionVariants";
+import axios from "axios";
 
 function Leasing() {
   const [result, setResult] = useState(undefined);
@@ -39,22 +40,37 @@ function Leasing() {
   });
 
   //HTTP request
-  const handleCalculation = ({ monthDuration, amountFinanced }) => {
+  const postCalculation = async ({ monthDuration, amountFinanced }) => {
     setLoading(true);
 
-    const roundedAmountFinanced = (
-      Math.round(amountFinanced * 100) / 100
-    ).toFixed(2);
-
-    setResult(parseFloat(roundedAmountFinanced / monthDuration).toFixed(2));
-
-    setLoading(false);
+    await axios
+      .post("http://localhost:80/calculate", {
+        monthDuration,
+        amountFinanced
+      })
+      .then((res) => {
+        const { data } = res;
+        setResult(data);
+        return setLoading(false);
+      })
+      .catch((err) => {
+        alert(err);
+        setLoading(false);
+      });
   };
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const finalInfo = { ...values, monthlyFee: parseFloat(result) };
-    setSuccess(true);
-    setTimeout(() => window.location.reload(), 3000);
-    return console.log(finalInfo);
+
+    await axios
+      .post("http://localhost:80/submit", finalInfo)
+      .then((res) => {
+        setTimeout(() => window.location.reload(), 3000);
+        return setSuccess(true);
+      })
+      .catch((err) => {
+        alert(err);
+        return setLoading(false);
+      });
   };
 
   //Render
@@ -91,7 +107,7 @@ function Leasing() {
               amountFinanced: ""
             }}
             validationSchema={LeasingSchema}
-            onSubmit={(values) => handleCalculation(values)}
+            onSubmit={(values) => postCalculation(values)}
           >
             {({ errors, touched, values, setFieldValue }) => (
               <Form>
