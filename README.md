@@ -1,10 +1,10 @@
 # LCar - Leasing Car Simulator
 
 This project is the result of a challenge, which consisted in creating a leasing car simulator web page.
-Essentialy LCar is a car leasing simulator web page, that get's 2 inputs and returns a value that can be submited. It's composed by two pages and connected to a node.js RESTfull API, called lcar-api.
+Essentially LCar is a car leasing simulator web page, that has a form with 2 inputs, and after calculating the value, the form can be submitted. It's composed of two pages and connected to a node.js RESTfull API, called lcar-api.
 
 Website: https://andre-rd-rodrigues.github.io/lcar/
-Heroku : https://lcar-api.herokuapp.com/
+API: https://lcar-api.herokuapp.com/
 
 ## Structure
 
