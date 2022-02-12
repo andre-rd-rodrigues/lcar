@@ -1,9 +1,11 @@
+import React, { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { dropDownVariants } from "motion/motionVariants";
-import React, { useEffect, useRef } from "react";
+import { TailSpin } from "react-loader-spinner";
 
 const SubmitButton = ({ values, errors, loading, onSubmit }) => {
   const buttonRef = useRef(null);
+  const size = 20;
 
   //Disable button when loading
   const disableButtonToggle = () => {
@@ -37,9 +39,19 @@ const SubmitButton = ({ values, errors, loading, onSubmit }) => {
             }}
             id="submit-btn"
             ref={buttonRef}
-            onClick={() => onSubmit(values)}
+            onClick={onSubmit}
           >
-            Submit
+            {loading ? (
+              <TailSpin
+                type="Oval"
+                color="white"
+                height={size}
+                width={size}
+                ariaLabel="loading"
+              />
+            ) : (
+              "Submit"
+            )}
           </motion.button>
         )}
     </AnimatePresence>

@@ -1,0 +1,15 @@
+@import "styles/mixins.scss";
+
+.modal {
+  max-width: 500px;
+  text-align: center;
+  & button[id="modal-confirm-button"] {
+    @include button(#64c08e, #64c08dda, white);
+    padding: 10px 25px;
+    margin-right: 10px;
+  }
+  & button[id="modal-cancel-button"] {
+    @include button(#858585, #969696da, white);
+    padding: 10px 25px;
+  }
+}
