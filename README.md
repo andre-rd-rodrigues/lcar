@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# LCar - Leasing Car Simulator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is the result of a challenge, which consisted in creating a leasing car simulator web page.
+Essentialy LCar is a car leasing simulator web page, that get's 2 inputs and returns a value that can be submited. It's composed by two pages and connected to a node.js RESTfull API, called lcar-api.
 
-## Available Scripts
+Website: https://andre-rd-rodrigues.github.io/lcar/
+Heroku : https://lcar-api.herokuapp.com/
 
-In the project directory, you can run:
+## Structure
 
-### `npm start`
+This project is composed by two pages (main components):
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Homepage
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Default page where user lands after opening the page.
+By clicking in `Get Started`, user gets redirected to the Leasing component.
 
-### `npm test`
+### Leasing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Composed by a form that takes 2 inputs: monthDuration and amountFinanced.
+`Calculate` button, sends a POST request and retrieves the monthly fee value.
+`Submit` opens a confirmation modal and if confirmed, send a POST request to submit the values.
 
-### `npm run build`
+## Hosting
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### lcar-api
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Simple node.js API created locally and hosted in heroku.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Lcar
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Hosted with github pages, from gh-pages branch.
