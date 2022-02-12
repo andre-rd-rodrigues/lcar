@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/lcar/static/css/main.e6e8610b.css",
-    "main.js": "/lcar/static/js/main.9ecc64fa.js",
+    "main.css": "/lcar/static/css/main.f74f0e20.css",
+    "main.js": "/lcar/static/js/main.202325bc.js",
     "static/media/car.png": "/lcar/static/media/car.f6d73cdb2ac00868bfa3.png",
     "index.html": "/lcar/index.html",
-    "main.e6e8610b.css.map": "/lcar/static/css/main.e6e8610b.css.map",
-    "main.9ecc64fa.js.map": "/lcar/static/js/main.9ecc64fa.js.map"
+    "main.f74f0e20.css.map": "/lcar/static/css/main.f74f0e20.css.map",
+    "main.202325bc.js.map": "/lcar/static/js/main.202325bc.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6e8610b.css",
-    "static/js/main.9ecc64fa.js"
+    "static/css/main.f74f0e20.css",
+    "static/js/main.202325bc.js"
   ]
 }
