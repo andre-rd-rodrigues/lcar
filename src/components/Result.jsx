@@ -5,7 +5,7 @@ import styles from "./result.module.scss";
 function Result({ result }) {
   return result ? (
     <>
-      <label>Monthly fee:</label>
+      <label>Monthly payment:</label>
       <AnimatedNumber
         className={styles.result}
         value={result}
