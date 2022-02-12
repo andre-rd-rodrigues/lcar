@@ -16,6 +16,7 @@ function Homepage() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      exit="exit"
       className={styles.homepage}
     >
       <div id="homepage-title-div">

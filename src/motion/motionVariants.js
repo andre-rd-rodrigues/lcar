@@ -9,6 +9,13 @@ export const containerVariants = {
       when: "beforeChildren",
       staggerChildren: 0.2
     }
+  },
+  exit: {
+    x: "80vw",
+    opacity: 0,
+    transition: {
+      ease: "easeInOut"
+    }
   }
 };
 
