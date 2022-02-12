@@ -11,8 +11,8 @@ function App() {
   return (
     <AnimatePresence exitBeforeEnter>
       <Routes location={location} key={location.key}>
-        <Route path="/lcar" element={<Homepage />} />
         <Route path="/simulator" element={<Leasing />} />
+        <Route path="*" element={<Homepage />} />
       </Routes>
       <ToastContainer progressClassName="progressBar" />
     </AnimatePresence>
