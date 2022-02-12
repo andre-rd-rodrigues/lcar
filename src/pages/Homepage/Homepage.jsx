@@ -21,7 +21,7 @@ function Homepage() {
     >
       <div id="homepage-title-div">
         <motion.h1 variants={fluidEnteringVariants}>
-          Looking to save more on a leasing car?
+          Looking to save money when leasing a car?
         </motion.h1>
         <motion.hr variants={fluidEnteringVariants} />
         <motion.p variants={fluidEnteringVariants}>

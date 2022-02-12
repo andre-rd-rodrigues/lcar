@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -11,20 +10,20 @@ import SuccessMessage from "../../components/SuccessMessage";
 import Result from "../../components/Result";
 import SubmitButton from "components/SubmitButton";
 import { motion } from "framer-motion";
+import { faCalculator } from "@fortawesome/free-solid-svg-icons";
 import {
   containerVariants,
   fluidEnteringVariants
 } from "../../motion/motionVariants";
 import styles from "./leasing.module.scss";
 import AppModal from "components/Modal";
+import AppToast from "components/AppToast";
 
 function Leasing() {
   const [result, setResult] = useState(undefined);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [confirmationModal, setConfirmationModal] = useState(false);
-
-  const navigate = useNavigate();
 
   //Form schema
   const LeasingSchema = Yup.object().shape({
@@ -47,7 +46,6 @@ function Leasing() {
   //HTTP request
   const postCalculation = async ({ monthDuration, amountFinanced }) => {
     setLoading(true);
-
     await axios
       .post(`${baseURL}/calculate`, {
         monthDuration,
@@ -59,7 +57,10 @@ function Leasing() {
         return setLoading(false);
       })
       .catch((err) => {
-        alert(err);
+        AppToast(
+          "Something went wrong... Please check your internet connection and try again.",
+          "error"
+        );
         return setLoading(false);
       });
   };
@@ -79,7 +80,10 @@ function Leasing() {
         return setSuccess(true);
       })
       .catch((err) => {
-        alert(err);
+        AppToast(
+          "Something went wrong... Please check your internet connection and try again.",
+          "error"
+        );
         return setLoading(false);
       });
   };
@@ -143,7 +147,12 @@ function Leasing() {
                     touched={touched.amountFinanced}
                   />
                   <Result result={result} />
-                  <Button type="submit" name="Calculate" loading={loading} />
+                  <Button
+                    type="submit"
+                    name="Calculate"
+                    loading={loading}
+                    icon={faCalculator}
+                  />
                   <SubmitButton
                     values={values}
                     errors={errors}

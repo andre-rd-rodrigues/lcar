@@ -2,6 +2,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Leasing from "pages/Leasing/Leasing";
 import Homepage from "pages/Homepage/Homepage";
 import { AnimatePresence } from "framer-motion";
+import { ToastContainer } from "react-toastify";
 import "styles/global.scss";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/lcar" element={<Homepage />} />
         <Route path="/simulator" element={<Leasing />} />
       </Routes>
+      <ToastContainer progressClassName="progressBar" />
     </AnimatePresence>
   );
 }

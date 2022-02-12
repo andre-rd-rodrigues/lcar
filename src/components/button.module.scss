@@ -2,4 +2,7 @@
   & div[data-testid="tail-spin-loading"] {
     justify-content: center !important;
   }
+  & svg {
+    margin: 0 10px;
+  }
 }

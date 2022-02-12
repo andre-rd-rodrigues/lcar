@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { dropDownVariants } from "motion/motionVariants";
 import { TailSpin } from "react-loader-spinner";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const SubmitButton = ({ values, errors, loading, onSubmit }) => {
   const buttonRef = useRef(null);
@@ -28,12 +30,6 @@ const SubmitButton = ({ values, errors, loading, onSubmit }) => {
         Object.keys(errors).length === 0 && (
           <motion.button
             variants={dropDownVariants}
-            exit={{
-              opacity: 0,
-              transition: {
-                duration: 0.3
-              }
-            }}
             whileHover={{
               scale: 1.07
             }}
@@ -50,7 +46,15 @@ const SubmitButton = ({ values, errors, loading, onSubmit }) => {
                 ariaLabel="loading"
               />
             ) : (
-              "Submit"
+              <>
+                <FontAwesomeIcon
+                  style={{ margin: "0 10px" }}
+                  icon={faPaperPlane}
+                  color="white"
+                  size="1x"
+                />
+                Submit
+              </>
             )}
           </motion.button>
         )}

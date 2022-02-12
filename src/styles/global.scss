@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@500;600&display=swap");
+@import "./colors.scss";
 
 body {
   background-color: #f3f5f7;
@@ -8,4 +9,34 @@ body {
   h2 {
     font-family: "Montserrat", sans-serif;
   }
+}
+
+//TOASTS
+.Toastify__toast-body {
+  font-family: "Avenir medium", Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  padding: 5px;
+  margin: auto;
+  color: white;
+  & path {
+    color: white;
+  }
+}
+.Toastify__toast--success {
+  background: #42a285;
+}
+.Toastify__toast--error {
+  background: #e17575;
+}
+.Toastify__toast--warning {
+  background: $yellow;
+}
+
+.Toastify__toast-icon {
+  & svg {
+    fill: white;
+  }
+}
+.progressBar {
+  background-color: white !important;
 }
