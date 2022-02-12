@@ -12,6 +12,9 @@ function Button(props) {
       {...props}
       className={styles.button}
       variants={fluidEnteringVariants}
+      whileHover={{
+        scale: 1.07
+      }}
     >
       {loading ? (
         <TailSpin

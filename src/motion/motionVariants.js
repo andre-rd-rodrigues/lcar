@@ -37,6 +37,22 @@ export const fluidEnteringVariants = {
   }
 };
 
+export const scaleEnteringVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 1
+    }
+  }
+};
+
 export const dropDownVariants = {
   hidden: {
     opacity: 0,
@@ -51,4 +67,8 @@ export const dropDownVariants = {
       duration: 1
     }
   }
+};
+
+export const buttonHoverVariants = {
+  scale: 1.06
 };

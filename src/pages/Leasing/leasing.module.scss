@@ -1,5 +1,4 @@
 @import "styles/mixins.scss";
-@import "styles/colors.scss";
 
 .leasing {
   display: flex;
@@ -17,12 +16,12 @@
     flex-direction: column;
     min-width: 300px;
     & button[type="submit"] {
-      @include button($yellow, white);
+      @include button(#fe5e3edc, #ff8025d0, white);
       margin: 12px 0;
     }
   }
   & button[id="submit-btn"] {
-    @include button(rgb(102, 156, 102), white);
+    @include button(#64c08e, #64c08dda, white);
     position: absolute;
     width: 100%;
     bottom: -45px;

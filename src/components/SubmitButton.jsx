@@ -32,6 +32,9 @@ const SubmitButton = ({ values, errors, loading, onSubmit }) => {
                 duration: 0.3
               }
             }}
+            whileHover={{
+              scale: 1.07
+            }}
             id="submit-btn"
             ref={buttonRef}
             onClick={() => onSubmit(values)}

@@ -1,0 +1,61 @@
+@import "styles/mixins.scss";
+@import "styles/colors.scss";
+
+.homepage {
+  display: flex;
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+  & hr {
+    max-width: 40px;
+    height: 5px;
+    border: none;
+    background-color: $yellow;
+    margin-inline-start: 0;
+  }
+  & img {
+    max-width: 100%;
+    min-width: 350px;
+  }
+  & svg {
+    top: 20%;
+    right: 50px;
+    position: absolute;
+    z-index: -1;
+  }
+  & p {
+    line-height: 25px;
+  }
+  & button {
+    @include button(#474fa0, #474ea0d8, white);
+    padding: 17px 25px;
+    margin-top: 10px;
+  }
+}
+
+@media screen and(max-width:750px) {
+  .homepage {
+    flex-wrap: wrap;
+    min-height: 75vh;
+    & div[id="homepage-car-div"] {
+      order: 1;
+    }
+    & div[id="homepage-title-div"] {
+      order: 2;
+    }
+    & svg {
+      top: -100px;
+      right: -100px;
+    }
+  }
+}
+@media screen and(max-width:400px) {
+  .homepage {
+    & button {
+      width: 100%;
+    }
+  }
+}
