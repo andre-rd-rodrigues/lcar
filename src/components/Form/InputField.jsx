@@ -1,7 +1,7 @@
 import { Field } from "formik";
 import { motion } from "framer-motion";
 import React from "react";
-import { fluidEnteringVariants } from "../motion/motionVariants";
+import { fluidEnteringVariants } from "motion/motionVariants";
 import styles from "./inputfield.module.scss";
 
 function InputField(props) {

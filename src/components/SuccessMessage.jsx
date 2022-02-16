@@ -5,7 +5,7 @@ import {
 } from "motion/motionVariants";
 import React from "react";
 import Lottie from "react-lottie";
-import successLottie from "../assets/lotties/success.json";
+import successLottie from "assets/lotties/success.json";
 import styles from "./successmessage.module.scss";
 
 function SuccessMessage() {

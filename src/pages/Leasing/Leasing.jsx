@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
+import { ErrorMessage, InputField, SubmitButton } from "components/Form";
 import * as Yup from "yup";
-import axios from "axios";
-import { baseURL } from "api/baseURL";
-import ErrorMessage from "../../components/ErrorMessage";
-import InputField from "../../components/InputField";
-import Button from "../../components/Button";
-import SuccessMessage from "../../components/SuccessMessage";
-import Result from "../../components/Result";
-import SubmitButton from "components/SubmitButton";
-import { motion } from "framer-motion";
-import { faCalculator } from "@fortawesome/free-solid-svg-icons";
+import axios from "api/leasingAxios";
+import Button from "components/Button";
+import Result from "components/Result";
+import ConfirmationModal from "components/Modal";
+import Notification from "components/AppToast";
+import SuccessMessage from "components/SuccessMessage";
 import {
   containerVariants,
   fluidEnteringVariants
-} from "../../motion/motionVariants";
+} from "motion/motionVariants";
+import { motion } from "framer-motion";
+import { faCalculator } from "@fortawesome/free-solid-svg-icons";
 import styles from "./leasing.module.scss";
-import AppModal from "components/Modal";
-import AppToast from "components/AppToast";
 
 function Leasing() {
   const [result, setResult] = useState(undefined);
@@ -26,7 +23,7 @@ function Leasing() {
   const [confirmationModal, setConfirmationModal] = useState(false);
 
   //Form schema
-  const LeasingSchema = Yup.object().shape({
+  const leasingSchema = Yup.object().shape({
     monthDuration: Yup.number()
       .min(6, "6 months minimum")
       .max(48, "48 months maximum")
@@ -47,7 +44,7 @@ function Leasing() {
   const postCalculation = async ({ monthDuration, amountFinanced }) => {
     setLoading(true);
     await axios
-      .post(`${baseURL}/calculate`, {
+      .post(`/calculate`, {
         monthDuration,
         amountFinanced
       })
@@ -57,7 +54,7 @@ function Leasing() {
         return setLoading(false);
       })
       .catch((err) => {
-        AppToast(
+        Notification(
           "Something went wrong... Please check your internet connection and try again.",
           "error"
         );
@@ -70,7 +67,7 @@ function Leasing() {
     setConfirmationModal(false);
 
     await axios
-      .post(`${baseURL}/submit`, finalInfo)
+      .post(`/submit`, finalInfo)
       .then((res) => {
         setTimeout(() => {
           setSuccess(false);
@@ -80,7 +77,7 @@ function Leasing() {
         return setSuccess(true);
       })
       .catch((err) => {
-        AppToast(
+        Notification(
           "Something went wrong... Please check your internet connection and try again.",
           "error"
         );
@@ -107,7 +104,7 @@ function Leasing() {
               monthDuration: "",
               amountFinanced: ""
             }}
-            validationSchema={LeasingSchema}
+            validationSchema={leasingSchema}
             onSubmit={(values) => postCalculation(values)}
           >
             {({ errors, touched, values, setFieldValue }) => (
@@ -160,7 +157,7 @@ function Leasing() {
                     onSubmit={() => setConfirmationModal(true)}
                   />
                 </Form>
-                <AppModal
+                <ConfirmationModal
                   openModal={confirmationModal}
                   onCloseModal={() => setConfirmationModal(false)}
                   onSubmit={handleSubmit}

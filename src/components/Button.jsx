@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import { TailSpin } from "react-loader-spinner";
-import { fluidEnteringVariants } from "../motion/motionVariants";
+import { fluidEnteringVariants } from "motion/motionVariants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./button.module.scss";
 

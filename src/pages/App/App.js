@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, HashRouter } from "react-router-dom";
 import Leasing from "pages/Leasing/Leasing";
 import Homepage from "pages/Homepage/Homepage";
 import { AnimatePresence } from "framer-motion";
