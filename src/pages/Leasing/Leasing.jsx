@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Formik, Form } from "formik";
 import { ErrorMessage, InputField, SubmitButton } from "components/Form";
 import * as Yup from "yup";
@@ -16,11 +16,18 @@ import { motion } from "framer-motion";
 import { faCalculator } from "@fortawesome/free-solid-svg-icons";
 import styles from "./leasing.module.scss";
 
+const isEqual = require("lodash/isEqual");
+
 function Leasing() {
   const [result, setResult] = useState(undefined);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [confirmationModal, setConfirmationModal] = useState(false);
+
+  let valuesRef = useRef({
+    amountFinanced: 0,
+    monthDuration: 0
+  });
 
   //Form schema
   const leasingSchema = Yup.object().shape({
@@ -42,7 +49,14 @@ function Leasing() {
 
   //HTTP request
   const postCalculation = async ({ monthDuration, amountFinanced }) => {
+    if (isEqual({ monthDuration, amountFinanced }, valuesRef.current)) return;
+
     setLoading(true);
+    valuesRef.current = {
+      monthDuration,
+      amountFinanced
+    };
+
     await axios
       .post(`/calculate`, {
         monthDuration,
